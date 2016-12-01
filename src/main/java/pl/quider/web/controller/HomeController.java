@@ -36,7 +36,7 @@ import java.util.ArrayList;
  */
 @Controller
 @RequestMapping("/")
-public class MessageController {
+public class HomeController {
 
 
 	@GetMapping

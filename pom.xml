@@ -8,13 +8,13 @@
 		<version>1.4.2.RELEASE</version>
 	</parent>
 	<artifactId>webpage</artifactId>
-	<name>Spring Boot Web Thymeleaf 3 Sample</name>
-	<description>Spring Boot Web Thymeleaf 3 Sample</description>
+	<name>Seller Web Page</name>
+	<description>Seller web assistance</description>
 	<url>http://projects.spring.io/spring-boot/</url>
 	<packaging>jar</packaging>
 	<organization>
-		<name>Pivotal Software, Inc.</name>
-		<url>http://www.spring.io</url>
+		<name>Quider Software</name>
+		<url>http://www.quider.pl</url>
 	</organization>
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>

@@ -21,19 +21,19 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="countryCode" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="localVersion" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="webapiKey" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="offset" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="packageElement" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="countryCode" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="localVersion" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         <element name="webapiKey" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="offset" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="packageElement" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
  * </pre>
  * 
  * 

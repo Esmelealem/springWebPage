@@ -19,17 +19,17 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ItemGetImage"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;all&gt;
- *         &lt;element name="itId" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="itSellerId" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="itFotoCount" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *       &lt;/all&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * <complexType name="ItemGetImage">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <all>
+ *         <element name="itId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         <element name="itSellerId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         <element name="itFotoCount" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       </all>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
  * </pre>
  * 
  * 

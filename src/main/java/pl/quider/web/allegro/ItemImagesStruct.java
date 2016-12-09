@@ -19,16 +19,16 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ItemImagesStruct"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;all&gt;
- *         &lt;element name="itemId" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="itemImages" type="{https://webapi.allegro.pl/service.php}ArrayOfItemimagelist" minOccurs="0"/&gt;
- *       &lt;/all&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * <complexType name="ItemImagesStruct">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <all>
+ *         <element name="itemId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         <element name="itemImages" type="{https://webapi.allegro.pl/service.php}ArrayOfItemimagelist" minOccurs="0"/>
+ *       </all>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
  * </pre>
  * 
  * 

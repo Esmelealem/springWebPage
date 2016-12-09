@@ -21,18 +21,18 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="sellFormFields" type="{https://webapi.allegro.pl/service.php}ArrayOfSellformtype" minOccurs="0"/&gt;
- *         &lt;element name="verKey" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="verStr" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="formFieldsCount" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="sellFormFields" type="{https://webapi.allegro.pl/service.php}ArrayOfSellformtype" minOccurs="0"/>
+ *         <element name="verKey" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         <element name="verStr" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="formFieldsCount" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
  * </pre>
  * 
  * 

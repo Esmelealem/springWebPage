@@ -1,5 +1,6 @@
 package pl.quider.web.service.impl;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.quider.web.allegro.*;
 import pl.quider.web.exception.AllegroException;
@@ -14,10 +15,12 @@ import java.util.List;
 @Service
 public class WebServiceAllegroImpl implements WebServiceAllegro{
 
-
-    private static final String USERNAME = "Quider";
-    private static final String PASSWORD = "2560494f6494b117";
-    private static final String WEBAPIKEY = "s2560494";
+    @Value("${allegro.login}")
+    private String USERNAME;
+    @Value("${allegro.password}")
+    private String PASSWORD;
+    @Value("${allegro.apikey}")
+    private String WEBAPIKEY;
 
     private String sessionKey = null;
     private String statusDescription;
@@ -64,13 +67,14 @@ public class WebServiceAllegroImpl implements WebServiceAllegro{
                     this.allegroStatus = WebServiceAllegro.AllegroStatus.OK;
                     serverTime = loginResponse.getServerTime();
                     this.expirationTime = serverTime + 3600;
-                    this.saveSession(serverTime, expirationTime, userId);
+//                    this.saveSession(serverTime, expirationTime, userId);
                     return true;
                 }
                 this.statusDescription = "Błąd logowania do Allegro!";
                 this.allegroStatus = AllegroStatus.ERROR;
                 throw new LoginException("Błąd logowania do allegro");
             } catch (Exception e) {
+                this.allegroStatus =AllegroStatus.SYSTEM_ERROR;
                 throw new LoginException(e);
             }
 

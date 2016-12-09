@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pl.quider.web.service.ifc.WebServiceAllegro;
 import pl.quider.web.service.impl.WebServiceAllegroImpl;
 
 import java.util.ArrayList;
@@ -34,12 +35,12 @@ import java.util.ArrayList;
 public class HomeController {
 
 	@Autowired
-	private WebServiceAllegroImpl serviceClient;
+	private WebServiceAllegro serviceClient;
 
 	@GetMapping
 	public ModelAndView list() {
 
-		serviceClient.logIn();
+		serviceClient.doLogin();
 
 		return new ModelAndView("messages/list", "messages", new ArrayList<String>());
 	}

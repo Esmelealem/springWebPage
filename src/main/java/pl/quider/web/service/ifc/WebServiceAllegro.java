@@ -32,6 +32,6 @@ public interface WebServiceAllegro {
     List<SiteJournalDealsStruct> getSiteJournalDeals();
 
     enum AllegroStatus {
-        OK, OFF, ERROR
+        OK, OFF, ERROR , SYSTEM_ERROR;
     }
 }

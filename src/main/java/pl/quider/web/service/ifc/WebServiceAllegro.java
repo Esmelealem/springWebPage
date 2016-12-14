@@ -1,6 +1,7 @@
 package pl.quider.web.service.ifc;
 
 import pl.quider.web.allegro.SiteJournalDealsStruct;
+import pl.quider.web.allegro.UserDataStruct;
 import pl.quider.web.exception.NotLoggedException;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface WebServiceAllegro {
     String getSessionKey() throws NotLoggedException;
 
     boolean doLogin();
+
+    UserDataStruct getUser();
 
     String getStatusDescription();
 

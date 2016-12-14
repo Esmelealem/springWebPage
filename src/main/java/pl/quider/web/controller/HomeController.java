@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pl.quider.web.allegro.UserDataStruct;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 import pl.quider.web.service.impl.WebServiceAllegroImpl;
 
@@ -34,15 +35,21 @@ import java.util.ArrayList;
 @RequestMapping("/")
 public class HomeController {
 
+	public static final String USER_NAME = "userName";
 	@Autowired
 	private WebServiceAllegro serviceClient;
 
 	@GetMapping
-	public ModelAndView list() {
+	public ModelAndView view() {
 
-		serviceClient.doLogin();
+		boolean b = serviceClient.doLogin();
 
-		return new ModelAndView("messages/list", "messages", new ArrayList<String>());
+		UserDataStruct user = serviceClient.getUser();
+		ModelAndView modelAndView = new ModelAndView("layout", "messages", new ArrayList<String>());
+
+		modelAndView.addObject(USER_NAME,new StringBuilder(user.getUserFirstName()).append(" ").append(user.getUserLastName()).toString());
+
+		return modelAndView;
 	}
 
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class WebServiceAllegroImpl implements WebServiceAllegro{
+public class WebServiceAllegroImpl implements WebServiceAllegro {
 
     @Value("${allegro.login}")
     private String USERNAME;
@@ -74,7 +74,7 @@ public class WebServiceAllegroImpl implements WebServiceAllegro{
                 this.allegroStatus = AllegroStatus.ERROR;
                 throw new LoginException("Błąd logowania do allegro");
             } catch (Exception e) {
-                this.allegroStatus =AllegroStatus.SYSTEM_ERROR;
+                this.allegroStatus = AllegroStatus.SYSTEM_ERROR;
                 throw new LoginException(e);
             }
 
@@ -83,13 +83,26 @@ public class WebServiceAllegroImpl implements WebServiceAllegro{
         }
     }
 
-//    @Async
-    private void saveSession(long serverTime2, long expirationTime2, long userId)  {
-        throw  new NotImplementedException();
+    @Override
+    public UserDataStruct getUser() {
+        if (doLogin()) {
+            DoGetMyDataRequest doGetMyDataRequest = new DoGetMyDataRequest();
+            doGetMyDataRequest.setSessionHandle(getSessionKey());
+            DoGetMyDataResponse response = servicePort.doGetMyData(doGetMyDataRequest);
+            return response.getUserData();
+        } else {
+            throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+        }
+
+    }
+
+    //    @Async
+    private void saveSession(long serverTime2, long expirationTime2, long userId) {
+        throw new NotImplementedException();
     }
 
     protected boolean isExpired() {
-        if ((expirationTime - (new Date().getTime()/1000)) < 0) {
+        if ((expirationTime - (new Date().getTime() / 1000)) < 0) {
             return true;
         } else {
             return false;

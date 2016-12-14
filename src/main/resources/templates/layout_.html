@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Layout</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="../../css/bootstrap.css"/>
+    <!--<link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}"  href="../../css/bootstrap-theme.css" />-->
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.validate.js"></script>
+    <script src="../../js/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav th:include="navbar/navbar"  class="navbar navbar-default"/>
+
+    <div class="panel" th:include="navbar/tabs"/>
+
+    <div class="row">
+        <div class="col-md-8">
+                    Basic panel example
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Basic panel example
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

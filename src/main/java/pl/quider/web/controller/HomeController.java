@@ -18,6 +18,7 @@ package pl.quider.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,16 +41,15 @@ public class HomeController {
 	private WebServiceAllegro serviceClient;
 
 	@GetMapping
-	public ModelAndView view() {
+	public ModelAndView view(ModelMap modelMap) {
 
 		boolean b = serviceClient.doLogin();
 
 		UserDataStruct user = serviceClient.getUser();
-		ModelAndView modelAndView = new ModelAndView("layout", "messages", new ArrayList<String>());
+		modelMap.addAttribute(USER_NAME,new StringBuilder(user.getUserFirstName()).append(" ").append(user.getUserLastName()).toString());
+		modelMap.addAttribute("allegroStatus", user != null);
 
-		modelAndView.addObject(USER_NAME,new StringBuilder(user.getUserFirstName()).append(" ").append(user.getUserLastName()).toString());
-
-		return modelAndView;
+		return new ModelAndView("layout", modelMap);
 	}
 
 }

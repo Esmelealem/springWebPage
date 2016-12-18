@@ -2,6 +2,8 @@ package pl.quider.web.service.ifc;
 
 import pl.quider.web.allegro.SiteJournalDealsStruct;
 import pl.quider.web.allegro.UserDataStruct;
+import pl.quider.web.exception.AllegroException;
+import pl.quider.web.exception.LoginException;
 import pl.quider.web.exception.NotLoggedException;
 
 import java.util.List;
@@ -12,27 +14,27 @@ import java.util.List;
 public interface WebServiceAllegro {
     String getSessionKey() throws NotLoggedException;
 
-    boolean doLogin();
+    boolean doLogin() throws LoginException;
 
-    UserDataStruct getUser();
+    UserDataStruct getUser() throws LoginException, NotLoggedException;
 
-    String getStatusDescription();
+    String getStatusDescription() throws NotLoggedException;
 
-    AllegroStatus getStatus();
+    AllegroStatus getStatus() throws NotLoggedException;
 
     boolean isAllegroAccount();
 
-    int getCountFavCategories();
+    int getCountFavCategories() throws NotLoggedException, AllegroException;
 
-    int getCountMySellItems();
+    int getCountMySellItems() throws NotLoggedException, AllegroException;
 
-    int getCountWaitingComments();
+    int getCountWaitingComments() throws NotLoggedException, AllegroException;
 
-    int getCountFutureItems();
+    int getCountFutureItems() throws NotLoggedException, AllegroException;
 
-    long getExpirationTime();
+    long getExpirationTime() throws NotLoggedException;
 
-    List<SiteJournalDealsStruct> getSiteJournalDeals();
+    List<SiteJournalDealsStruct> getSiteJournalDeals() throws AllegroException;
 
     enum AllegroStatus {
         OK, OFF, ERROR , SYSTEM_ERROR;

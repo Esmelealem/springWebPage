@@ -1,7 +1,7 @@
 package pl.quider.web.exception;
 
 
-public class LoginException extends RuntimeException {
+public class LoginException extends Exception {
 
     public LoginException(Exception e) {
         super(e);

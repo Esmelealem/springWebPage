@@ -8,7 +8,9 @@ import pl.quider.web.exception.LoginException;
 import pl.quider.web.exception.NotLoggedException;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import sun.rmi.runtime.Log;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,15 +33,18 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
 
     @Override
     public String getSessionKey() throws NotLoggedException {
-        if (doLogin()) {
-            return this.sessionKey;
-        } else {
+        try {
+            if (doLogin()) {
+                return this.sessionKey;
+            }
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         }
+        return null;
     }
 
     @Override
-    public boolean doLogin() {
+    public boolean doLogin() throws LoginException {
         if (this.isExpired()) {
             try {
                 ServiceService service = new ServiceService();
@@ -84,13 +89,15 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
     }
 
     @Override
-    public UserDataStruct getUser() {
-        if (doLogin()) {
+    public UserDataStruct getUser() throws NotLoggedException {
+        try {
+            doLogin();
             DoGetMyDataRequest doGetMyDataRequest = new DoGetMyDataRequest();
             doGetMyDataRequest.setSessionHandle(getSessionKey());
             DoGetMyDataResponse response = servicePort.doGetMyData(doGetMyDataRequest);
             return response.getUserData();
-        } else {
+
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         }
 
@@ -110,19 +117,21 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
     }
 
     @Override
-    public String getStatusDescription() {
-        if (doLogin()) {
+    public String getStatusDescription() throws NotLoggedException {
+        try {
+            doLogin();
             return this.statusDescription;
-        } else {
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         }
     }
 
     @Override
-    public AllegroStatus getStatus() {
-        if (doLogin()) {
+    public AllegroStatus getStatus() throws NotLoggedException {
+        try {
+            doLogin();
             return this.allegroStatus;
-        } else {
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         }
     }
@@ -134,86 +143,95 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
     }
 
     @Override
-    public int getCountFavCategories() {
-        if (doLogin()) {
-            try {
-                DoGetFavouriteCategoriesRequest categoriesRequest = new DoGetFavouriteCategoriesRequest();
-                categoriesRequest.setSessionHandle(this.sessionKey);
-                DoGetFavouriteCategoriesResponse response = this.servicePort.doGetFavouriteCategories(categoriesRequest);
-                ArrayOfFavouritescategoriesstruct categoriesList = response.getSFavouriteCategoriesList();
-                return categoriesList.getItem().size();
-            } catch (Exception e) {
-                throw new AllegroException(e);
-            }
+    public int getCountFavCategories() throws NotLoggedException, AllegroException {
+
+        try {
+            doLogin();
+            DoGetFavouriteCategoriesRequest categoriesRequest = new DoGetFavouriteCategoriesRequest();
+            categoriesRequest.setSessionHandle(this.sessionKey);
+            DoGetFavouriteCategoriesResponse response = this.servicePort.doGetFavouriteCategories(categoriesRequest);
+            ArrayOfFavouritescategoriesstruct categoriesList = response.getSFavouriteCategoriesList();
+            return categoriesList.getItem().size();
+        } catch (LoginException e) {
+            throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+        } catch (Exception e) {
+            throw new AllegroException(e);
         }
-        throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
     }
 
     @Override
-    public int getCountMySellItems() {
-        if (doLogin()) {
-            try {
-                DoGetMySellItemsRequest request = new DoGetMySellItemsRequest();
-                request.setSessionId(sessionKey);
-                DoGetMySellItemsResponse response = this.servicePort.doGetMySellItems(request);
-                int sellItemsCounter = response.getSellItemsCounter();
-                return sellItemsCounter;
-            } catch (Exception e) {
-                throw new AllegroException(e);
-            }
+    public int getCountMySellItems() throws NotLoggedException, AllegroException {
+
+        try {
+            doLogin();
+            DoGetMySellItemsRequest request = new DoGetMySellItemsRequest();
+            request.setSessionId(sessionKey);
+            DoGetMySellItemsResponse response = this.servicePort.doGetMySellItems(request);
+            int sellItemsCounter = response.getSellItemsCounter();
+            return sellItemsCounter;
+        } catch (LoginException e) {
+            throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+        } catch (Exception e) {
+            throw new AllegroException(e);
         }
-        throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
     }
 
     @Override
-    public int getCountWaitingComments() {
-        if (doLogin()) {
-            try {
-                DoGetWaitingFeedbacksCountRequest request = new DoGetWaitingFeedbacksCountRequest();
-                request.setSessionHandle(sessionKey);
-                DoGetWaitingFeedbacksCountResponse response = this.servicePort.doGetWaitingFeedbacksCount(request);
-                return response.getFeedbackCount();
-            } catch (Exception e) {
-                throw new AllegroException(e);
-            }
+    public int getCountWaitingComments() throws NotLoggedException, AllegroException {
+        try {
+            doLogin();
+            DoGetWaitingFeedbacksCountRequest request = new DoGetWaitingFeedbacksCountRequest();
+            request.setSessionHandle(sessionKey);
+            DoGetWaitingFeedbacksCountResponse response = this.servicePort.doGetWaitingFeedbacksCount(request);
+            return response.getFeedbackCount();
+        } catch (LoginException e) {
+            throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+        } catch (Exception e) {
+            throw new AllegroException(e);
         }
-        throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
     }
 
+
     @Override
-    public int getCountFutureItems() {
-        if (doLogin()) {
-            try {
-                DoGetMyFutureItemsRequest request = new DoGetMyFutureItemsRequest();
-                request.setSessionId(this.sessionKey);
-                DoGetMyFutureItemsResponse response = this.servicePort.doGetMyFutureItems(request);
-                return response.getFutureItemsCounter();
-            } catch (Exception e) {
-                throw new AllegroException(e);
-            }
+    public int getCountFutureItems() throws NotLoggedException, AllegroException {
+        try {
+            doLogin();
+            DoGetMyFutureItemsRequest request = new DoGetMyFutureItemsRequest();
+            request.setSessionId(this.sessionKey);
+            DoGetMyFutureItemsResponse response = this.servicePort.doGetMyFutureItems(request);
+            return response.getFutureItemsCounter();
+        } catch (LoginException e) {
+            throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+        } catch (Exception e) {
+            throw new AllegroException(e);
         }
-        throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+
     }
 
     /**
      * @return the serverTime
      */
-    protected long getServerTime() {
-        if (doLogin()) {
+    protected long getServerTime() throws NotLoggedException {
+        try {
+            doLogin();
             return serverTime;
-        } else {
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         }
     }
 
+
     /**
      * @return the servicePort
      */
-    protected ServicePort getServicePort() {
-        if (doLogin()) {
+    protected ServicePort getServicePort() throws NotLoggedException, AllegroException {
+        try {
+            doLogin();
             return servicePort;
-        } else {
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
+        } catch (Exception e) {
+            throw new AllegroException(e);
         }
     }
 
@@ -221,22 +239,37 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
      * @return the expirationTime
      */
     @Override
-    public long getExpirationTime() {
-        if (doLogin()) {
+    public long getExpirationTime() throws NotLoggedException {
+        try {
+            doLogin();
             return expirationTime;
-        } else {
+        } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         }
     }
 
+    /**
+     * Fetches all journals notifications
+     *
+     * @return full list of journals
+     */
     @Override
-    public List<SiteJournalDealsStruct> getSiteJournalDeals() {
+    public List<SiteJournalDealsStruct> getSiteJournalDeals() throws AllegroException {
         try {
+            List<SiteJournalDealsStruct> resultList = new ArrayList<SiteJournalDealsStruct>();
             DoGetSiteJournalDealsRequest request = new DoGetSiteJournalDealsRequest();
             request.setSessionId(this.getSessionKey());
-            DoGetSiteJournalDealsResponse response = this.getServicePort().doGetSiteJournalDeals(request);
-            ArrayOfSitejournaldealsstruct siteJournalDeals = response.getSiteJournalDeals();
-            return siteJournalDeals.getItem();
+            int size = 0;
+            do {
+                DoGetSiteJournalDealsResponse response = this.getServicePort().doGetSiteJournalDeals(request);
+                ArrayOfSitejournaldealsstruct siteJournalDeals = response.getSiteJournalDeals();
+                List<SiteJournalDealsStruct> item = siteJournalDeals.getItem();
+                resultList.addAll(item);
+                size = item.size();
+                SiteJournalDealsStruct lastElement = item.get(size - 1);
+                request.setJournalStart(lastElement.getDealEventId());
+            } while (size == 100);
+            return resultList;
         } catch (Exception e) {
             throw new AllegroException(e);
         }

@@ -318,18 +318,24 @@
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_news"></span>
-					  			<h3>+10</h3>
+					  			<!--/*@thymesVar id="allegroStatus" type="boolean"*/-->
+					  			<h3 th:if="${allegroStatus}" th:text="10"></h3>
+					  			<h3 th:if="${!allegroStatus}" th:text="0">+10</h3>
                   			</div>
-					  			<p>More than 10 news were added in your reader.</p>
+					  			<!--/*@thymesVar id="allegroStatus" type=""*/-->
+					  			<p th:if="${!allegroStatus}" th:text="#{layout.allegro.noOk.desc}" />
+                                <p th:if="${allegroStatus}" th:text="#{layout.allegro.news}" />
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_data"></span>
 					  			<!--/*@thymesVar id="allegroStatus" type="boolean"*/-->
-					  			<h3 th:if="${allegroStatus}" th:text="#{layout.OK}">OK!</h3>
-                                <h3 th:if="${!allegroStatus}" th:text="#{layout.noOK}">OK!</h3>
+					  			<h3 th:if="${allegroStatus}" th:text="#{layout.allegro.OK}">OK!</h3>
+                                <h3 th:if="${!allegroStatus}" th:text="#{layout.allegro.noOK}">OK!</h3>
                   			</div>
-					  			<p>Your server is working perfectly. Relax & enjoy.</p>
+					  			<!--/*@thymesVar id="allegroStatus" type="boolean"*/-->
+					  			<p th:if="${allegroStatus}" th:text="#{layout.allegro.ok.desc}">Your server is working perfectly. Relax & enjoy.</p>
+					  			<p th:if="${!allegroStatus}" th:text="#{layout.allegro.noOk.desc}">Your server is working perfectly. Relax & enjoy.</p>
                   		</div>
                   	
                   	</div><!-- /row mt -->	

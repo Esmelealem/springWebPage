@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -325,7 +325,9 @@
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_data"></span>
-					  			<h3>OK!</h3>
+					  			<!--/*@thymesVar id="allegroStatus" type="boolean"*/-->
+					  			<h3 th:if="${allegroStatus}" th:text="#{layout.OK}">OK!</h3>
+                                <h3 th:if="${!allegroStatus}" th:text="#{layout.noOK}">OK!</h3>
                   			</div>
 					  			<p>Your server is working perfectly. Relax & enjoy.</p>
                   		</div>

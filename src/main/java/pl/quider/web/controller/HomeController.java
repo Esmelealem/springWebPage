@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.quider.web.allegro.UserDataStruct;
+import pl.quider.web.exception.LoginException;
+import pl.quider.web.exception.NotLoggedException;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 import pl.quider.web.service.impl.WebServiceAllegroImpl;
 
@@ -36,20 +38,28 @@ import java.util.ArrayList;
 @RequestMapping("/")
 public class HomeController {
 
-	public static final String USER_NAME = "userName";
-	@Autowired
-	private WebServiceAllegro serviceClient;
+    public static final String USER_NAME = "userName";
+    public static final String ALLEGRO_STATUS = "allegroStatus";
+    @Autowired
+    private WebServiceAllegro serviceClient;
 
-	@GetMapping
-	public ModelAndView view(ModelMap modelMap) {
+    @GetMapping
+    public ModelAndView view(ModelMap modelMap) {
+        UserDataStruct user;
+        boolean userLoggedIn = false;
 
-		boolean b = serviceClient.doLogin();
+        try {
+            userLoggedIn = serviceClient.doLogin();
+            user = serviceClient.getUser();
+        } catch (LoginException | NotLoggedException e) {
+            user = new UserDataStruct();
+            user.setUserFirstName("Not");
+            user.setUserLastName("Logged in");
+        }
+        modelMap.addAttribute(USER_NAME, new StringBuilder(user.getUserFirstName()).append(" ").append(user.getUserLastName()).toString());
+        modelMap.addAttribute(ALLEGRO_STATUS, userLoggedIn);
 
-		UserDataStruct user = serviceClient.getUser();
-		modelMap.addAttribute(USER_NAME,new StringBuilder(user.getUserFirstName()).append(" ").append(user.getUserLastName()).toString());
-		modelMap.addAttribute("allegroStatus", user != null);
-
-		return new ModelAndView("layout", modelMap);
-	}
+        return new ModelAndView("layout", modelMap);
+    }
 
 }

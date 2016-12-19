@@ -319,7 +319,8 @@
                   			<div class="box1">
 					  			<span class="li_news"></span>
 					  			<!--/*@thymesVar id="allegroStatus" type="boolean"*/-->
-					  			<h3 th:if="${allegroStatus}" th:text="10"></h3>
+					  			<!--/*@thymesVar id="dealsCount" type="Integer"*/-->
+					  			<h3 th:if="${allegroStatus}" th:text="${dealsCount}"></h3>
 					  			<h3 th:if="${!allegroStatus}" th:text="0">+10</h3>
                   			</div>
 					  			<!--/*@thymesVar id="allegroStatus" type=""*/-->

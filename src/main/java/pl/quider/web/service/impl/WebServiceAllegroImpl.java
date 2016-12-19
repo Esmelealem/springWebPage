@@ -266,14 +266,17 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
                 List<SiteJournalDealsStruct> item = siteJournalDeals.getItem();
                 resultList.addAll(item);
                 size = item.size();
-                SiteJournalDealsStruct lastElement = item.get(size - 1);
-                request.setJournalStart(lastElement.getDealEventId());
+                if(size > 0) {
+                    SiteJournalDealsStruct lastElement = item.get(size - 1);
+                    request.setJournalStart(lastElement.getDealEventId());
+                }
             } while (size == 100);
             return resultList;
         } catch (Exception e) {
             throw new AllegroException(e);
         }
     }
+
 
 
 }

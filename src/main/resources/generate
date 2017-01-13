@@ -1,0 +1,19 @@
+#!/bin/bash
+JAVA_HOME="/home/adrian/projects/jdk1.8.0_92/bin/"
+wsdl="https://webapi.allegro.pl.webapisandbox.pl/service.php?wsdl"
+directory="wsimport"
+package="pl.quider.web.allegro"
+WSIMPORT=$JAVA_HOME"wsimport"
+
+echo $WSIMPORT
+if [ -d "$directory" ]; then
+	rm -r $directory
+fi
+mkdir $directory
+$WSIMPORT -keep -p $package -d $directory $wsdl
+
+
+cp wsimport/pl/quider/web/allegro/*.java ../java/pl/quider/web/allegro/
+rm -r $directory
+
+

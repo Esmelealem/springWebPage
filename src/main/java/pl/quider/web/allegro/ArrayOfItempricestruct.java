@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="item" type="{https://webapi.allegro.pl/service.php}ItemPriceStruct" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="item" type="{urn:SandboxWebApi}ItemPriceStruct" maxOccurs="unbounded" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

@@ -1,5 +1,7 @@
 package pl.quider.web.service.impl;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.quider.web.allegro.*;
@@ -23,6 +25,8 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
     private String PASSWORD;
     @Value("${allegro.apikey}")
     private String WEBAPIKEY;
+
+    private final static Logger LOG = LogManager.getLogger("allegroWS");
 
     private String sessionKey = null;
     private String statusDescription;
@@ -79,6 +83,7 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
                 this.allegroStatus = AllegroStatus.ERROR;
                 throw new LoginException("Błąd logowania do allegro");
             } catch (Exception e) {
+                LOG.error(e.getMessage(),e);
                 this.allegroStatus = AllegroStatus.SYSTEM_ERROR;
                 throw new LoginException(e);
             }

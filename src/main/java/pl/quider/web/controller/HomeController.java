@@ -34,8 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Rob Winch
- * @author Doo-Hwan Kwak
+ *
  */
 @Controller
 @RequestMapping("/")

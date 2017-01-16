@@ -25,8 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 
 /**
- * @author Rob Winch
- * @author Doo-Hwan Kwak
+ *
  */
 @Controller
 @RequestMapping("/store")

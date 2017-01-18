@@ -8,31 +8,31 @@
     <!-- sidebar menu start-->
     <ul class="sidebar-menu" id="nav-accordion">
 
-        <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+        <p class="centered"><a href="profile.html"><img th:src="@{/assets/img/ui-sam.jpg}" class="img-circle" width="60"></a></p>
         <!--/*@thymesVar id="userName" type="java.lang.String"*/-->
         <h5 class="centered" th:text="${userName}">Nie zalogowany</h5>
 
         <li class="mt">
-            <a class="active" href="index.html">
+            <a class="active" th:href="index">
                 <i class="fa fa-dashboard"></i>
                 <span>Dashboard</span>
             </a>
         </li>
 
         <li class="sub-menu">
-            <a href="javascript:;" >
+            <a th:href="@{javascript:;}" >
                 <i class="fa fa-desktop"></i>
                 <span>Sklep</span>
             </a>
             <ul class="sub">
-                <li><a  href="store/customers">Klienci</a></li>
+                <li><a  th:href="@{/store/customers}">Klienci</a></li>
                 <li><a  href="buttons.html">Oferty</a></li>
                 <li><a  href="panels.html">Płatności</a></li>
             </ul>
         </li>
 
         <li class="sub-menu">
-            <a href="javascript:;" >
+            <a th:href="@{javascript:;}" >
                 <i class="fa fa-cogs"></i>
                 <span>Components</span>
             </a>

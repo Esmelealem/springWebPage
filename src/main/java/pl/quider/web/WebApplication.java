@@ -21,10 +21,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.convert.converter.Converter;
 
 @SpringBootApplication
 public class WebApplication {
+
+//	@Bean
+//	public ThymeleafViewResolver thymeleafViewResolver() {
+//		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+////		resolver.setTemplateEngine(templateEngine());
+//		resolver.setCharacterEncoding("UTF-8");
+//		return resolver;
+//	}
 
 	@Bean
 	public MessageSource messageSource() {

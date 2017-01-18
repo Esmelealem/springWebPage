@@ -37,7 +37,7 @@ import java.util.List;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping({"/","/index"})
 public class HomeController {
 
     public static final String USER_NAME = "userName";

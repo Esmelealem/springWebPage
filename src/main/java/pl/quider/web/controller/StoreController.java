@@ -54,13 +54,13 @@ public class StoreController {
     @GetMapping("offers")
     public ModelAndView viewOffers(ModelMap modelMap) {
 
-        return new ModelAndView("customers/table", modelMap);
+        return new ModelAndView("customers/offers", modelMap);
     }
 
     @GetMapping("payments")
     public ModelAndView viewPayments(ModelMap modelMap) {
 
-        return new ModelAndView("customers/table", modelMap);
+        return new ModelAndView("customers/payments", modelMap);
     }
 
 }

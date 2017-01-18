@@ -52,6 +52,7 @@ public class HomeController {
         boolean userLoggedIn = false;
         List<SiteJournalDealsStruct> deals = new ArrayList<>(0) ;
 
+        //todo: this can be done in bean instead
         try {
             userLoggedIn = serviceClient.doLogin();
             user = serviceClient.getUser();

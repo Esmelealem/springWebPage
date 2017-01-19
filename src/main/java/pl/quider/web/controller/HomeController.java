@@ -52,7 +52,6 @@ public class HomeController {
         boolean userLoggedIn = false;
         List<SiteJournalDealsStruct> deals = new ArrayList<>(0) ;
 
-        //todo: this can be done in bean instead
         try {
             userLoggedIn = serviceClient.doLogin();
             user = serviceClient.getUser();
@@ -69,7 +68,7 @@ public class HomeController {
         modelMap.addAttribute(USER_NAME, new StringBuilder(user.getUserFirstName()).append(" ").append(user.getUserLastName()).toString());
         modelMap.addAttribute(ALLEGRO_STATUS, userLoggedIn);
 
-        return new ModelAndView("layout", modelMap);
+        return new ModelAndView("dashboard/dashboard", modelMap);
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.Collection;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column
     private String name;
     @Column

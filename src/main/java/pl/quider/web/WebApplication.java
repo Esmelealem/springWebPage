@@ -25,14 +25,6 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 @SpringBootApplication
 public class WebApplication {
 
-//	@Bean
-//	public ThymeleafViewResolver thymeleafViewResolver() {
-//		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-////		resolver.setTemplateEngine(templateEngine());
-//		resolver.setCharacterEncoding("UTF-8");
-//		return resolver;
-//	}
-
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

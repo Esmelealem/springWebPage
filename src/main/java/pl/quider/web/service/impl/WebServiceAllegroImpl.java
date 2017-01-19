@@ -10,7 +10,6 @@ import pl.quider.web.exception.LoginException;
 import pl.quider.web.exception.NotLoggedException;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -172,8 +171,7 @@ public class WebServiceAllegroImpl implements WebServiceAllegro {
             DoGetMySellItemsRequest request = new DoGetMySellItemsRequest();
             request.setSessionId(sessionKey);
             DoGetMySellItemsResponse response = this.servicePort.doGetMySellItems(request);
-            int sellItemsCounter = response.getSellItemsCounter();
-            return sellItemsCounter;
+            return response.getSellItemsCounter();
         } catch (LoginException e) {
             throw new NotLoggedException(NotLoggedException.NOT_LOGGED_CAUSE);
         } catch (Exception e) {

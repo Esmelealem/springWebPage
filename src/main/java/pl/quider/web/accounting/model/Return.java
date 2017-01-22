@@ -1,4 +1,4 @@
-package pl.quider.web.system.model;
+package pl.quider.web.accounting.model;
 
 import pl.quider.web.contact.model.Contact;
 

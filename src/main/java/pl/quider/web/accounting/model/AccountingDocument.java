@@ -1,6 +1,7 @@
-package pl.quider.web.system.model;
+package pl.quider.web.accounting.model;
 
 import pl.quider.web.contact.model.Contact;
+import pl.quider.web.system.model.EntityType;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

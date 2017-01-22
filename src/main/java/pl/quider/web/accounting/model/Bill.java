@@ -1,4 +1,4 @@
-package pl.quider.web.system.model;
+package pl.quider.web.accounting.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,13 +1,10 @@
-package pl.quider.web.system.model;
+package pl.quider.web.accounting.model;
 
 import pl.quider.web.system.model.EntityType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * Created by Adrian on 20.01.2017.
- */
 @Entity
 @Table(name = "item")
 public class Item extends EntityType {
@@ -17,6 +14,13 @@ public class Item extends EntityType {
 
     @Column(name = "tax")
     private BigDecimal tax;
+
+    @Column(name ="discount")
+    private BigDecimal discount;
+
+    @OneToOne
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
 
     public BigDecimal getPrice() {
         return price;
@@ -32,5 +36,21 @@ public class Item extends EntityType {
 
     public void setTax(BigDecimal tax) {
         this.tax = tax;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 }

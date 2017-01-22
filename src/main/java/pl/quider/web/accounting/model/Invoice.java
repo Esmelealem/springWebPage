@@ -20,7 +20,7 @@ public class Invoice extends Bill {
     @JoinColumn(name = "buyer_id")
     private Contact buyer;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "payment_type_id")
     private PaymentType paymentType;
 

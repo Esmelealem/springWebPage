@@ -1,93 +1,152 @@
-CREATE TABLE contrahent
+CREATE TABLE account_document
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    address VARCHAR(255) NOT NULL,
-    joined DATETIME,
-    name VARCHAR(255),
-    nip VARCHAR(255),
-    pesel VARCHAR(255),
-    regon VARCHAR(255)
+    dtype VARCHAR(31) NOT NULL,
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    date DATETIME,
+    number VARCHAR(255),
+    gross_value DECIMAL(19,2),
+    corrected_value DECIMAL(19,2),
+    deliver_date DATE,
+    discount_total DECIMAL(19,2),
+    net DECIMAL(19,2),
+    payment_term DATETIME,
+    total DECIMAL(19,2),
+    seller_id INT(11),
+    return_contact_id INT(11),
+    buyer_id INT(11),
+    payment_type_id INT(11)
 );
-CREATE TABLE court
+CREATE TABLE account_document_items
+(
+    accounting_document_id INT(11) NOT NULL,
+    items_id INT(11) NOT NULL
+);
+CREATE TABLE address
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    email VARCHAR(255),
-    password VARCHAR(255),
-    role VARCHAR(255)
+    city VARCHAR(255),
+    flat_number VARCHAR(255),
+    house_number VARCHAR(255),
+    street VARCHAR(255),
+    zip_code VARCHAR(255)
 );
-CREATE TABLE document
+CREATE TABLE address_type
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    created DATETIME,
-    payedby INT(11),
-    contrahent_id BIGINT(20)
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATETIME,
+    deleted DATETIME,
+    modified DATETIME,
+    name VARCHAR(255)
 );
-CREATE TABLE documentline
+CREATE TABLE contact
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    discount DOUBLE,
-    quantity INT(11),
-    document_id BIGINT(20),
-    item_id BIGINT(20)
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    birth_date DATETIME,
+    first_name VARCHAR(255),
+    found_date DATETIME,
+    last_name VARCHAR(255) NOT NULL,
+    middle_name VARCHAR(255)
+);
+CREATE TABLE contact_address
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    address_id INT(11),
+    address_type_id INT(11),
+    contact_id INT(11)
+);
+CREATE TABLE contact_type
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATETIME,
+    deleted DATETIME,
+    modified DATETIME,
+    name VARCHAR(255)
 );
 CREATE TABLE item
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    added DATETIME,
-    buyPrice DECIMAL(19,2),
-    ean VARCHAR(255),
-    itemNote VARCHAR(255),
-    name VARCHAR(255) NOT NULL,
-    netPrice DECIMAL(19,2),
-    photoPath VARCHAR(255),
-    pkw VARCHAR(255),
-    serialNumber VARCHAR(255),
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    discount DECIMAL(19,2),
+    price DECIMAL(19,2),
     tax DECIMAL(19,2),
-    unit VARCHAR(255)
+    unit_id INT(11)
 );
-CREATE TABLE mainmenuitem
+CREATE TABLE menu
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    cssClass VARCHAR(255),
-    href VARCHAR(255),
-    image VARCHAR(255),
     name VARCHAR(255),
-    parent INT(11)
+    pos VARCHAR(255)
 );
-CREATE TABLE session
+CREATE TABLE menu_item
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    expirationTime BIGINT(20),
-    time BIGINT(20),
-    userId BIGINT(20)
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATE,
+    display_name VARCHAR(255),
+    href VARCHAR(255),
+    modified DATE,
+    name VARCHAR(255),
+    menu_id INT(11)
 );
-CREATE TABLE setting
+CREATE TABLE payment_type
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATETIME,
+    deleted DATETIME,
+    modified DATETIME,
+    name VARCHAR(255)
+);
+CREATE TABLE post
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     added DATETIME,
     modified DATETIME,
-    setingKey VARCHAR(255),
-    settingValue VARCHAR(255)
+    place_holder VARCHAR(255),
+    state INT(11),
+    text VARCHAR(255),
+    title VARCHAR(255)
 );
-CREATE TABLE test
+CREATE TABLE section
 (
-    id INT(11) NOT NULL
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATE,
+    modified DATE,
+    name VARCHAR(255)
+);
+CREATE TABLE unit
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATETIME,
+    deleted DATETIME,
+    modified DATETIME,
+    name VARCHAR(255)
 );
 CREATE TABLE user
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    address VARCHAR(255),
-    email VARCHAR(255),
-    login VARCHAR(255),
-    name VARCHAR(255),
-    nip VARCHAR(255),
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    added DATETIME,
+    avatar VARCHAR(255),
+    modified DATETIME,
     password VARCHAR(255),
-    pesel VARCHAR(255),
-    surname VARCHAR(255)
+    username VARCHAR(255)
 );
-ALTER TABLE document ADD FOREIGN KEY (contrahent_id) REFERENCES contrahent (id);
-CREATE INDEX FK_fa5vkb0w25y0wvn82wogm825x ON document (contrahent_id);
-ALTER TABLE documentline ADD FOREIGN KEY (document_id) REFERENCES document (id);
-ALTER TABLE documentline ADD FOREIGN KEY (item_id) REFERENCES item (id);
-CREATE INDEX FK_7u4abyjwf2ac41o9pug2ato35 ON documentline (item_id);
-CREATE INDEX FK_c3nhnwwn7u743xc3fa50rec50 ON documentline (document_id);
+ALTER TABLE account_document ADD FOREIGN KEY (seller_id) REFERENCES contact (id);
+ALTER TABLE account_document ADD FOREIGN KEY (return_contact_id) REFERENCES contact (id);
+ALTER TABLE account_document ADD FOREIGN KEY (buyer_id) REFERENCES contact (id);
+ALTER TABLE account_document ADD FOREIGN KEY (payment_type_id) REFERENCES payment_type (id);
+CREATE INDEX FK3e757gkrii9x2oicxo80fvo5a ON account_document (seller_id);
+CREATE INDEX FKniiboshwdv9u3r69277iqkdn8 ON account_document (payment_type_id);
+CREATE INDEX FKpwt08l1fohbgddtnf64951a7r ON account_document (buyer_id);
+CREATE INDEX FKretbxu9jy6c0bvk11e6eoxaij ON account_document (return_contact_id);
+ALTER TABLE account_document_items ADD FOREIGN KEY (accounting_document_id) REFERENCES account_document (id);
+ALTER TABLE account_document_items ADD FOREIGN KEY (items_id) REFERENCES item (id);
+CREATE INDEX FKm9i20pjrquq01h83q6gwj5qou ON account_document_items (accounting_document_id);
+CREATE UNIQUE INDEX UK_ld14vgsx0h2olgfrw1shbkwa4 ON account_document_items (items_id);
+ALTER TABLE contact_address ADD FOREIGN KEY (address_id) REFERENCES address (id);
+ALTER TABLE contact_address ADD FOREIGN KEY (address_type_id) REFERENCES address_type (id);
+ALTER TABLE contact_address ADD FOREIGN KEY (contact_id) REFERENCES contact (id);
+CREATE INDEX FKa63wvjlxiwgo0098siqj9kjav ON contact_address (address_id);
+CREATE INDEX FKqqxykpjj1qrgxle7cpp0txicc ON contact_address (contact_id);
+CREATE INDEX FKt4o7iroammmtmat04ov3x6fc8 ON contact_address (address_type_id);
+ALTER TABLE item ADD FOREIGN KEY (unit_id) REFERENCES unit (id);
+CREATE INDEX FKdslletxhla0nehtlnmh63m2sj ON item (unit_id);
+ALTER TABLE menu_item ADD FOREIGN KEY (menu_id) REFERENCES menu (id);
+CREATE INDEX FKcdkmv42yhn6udah6ug8rsymfl ON menu_item (menu_id);

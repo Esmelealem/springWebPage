@@ -5,22 +5,14 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "menu")
-public class Menu extends EntityType {
+public class Menu extends DictionaryEntity {
 
     @Column
-    private String name;
-    @Column
     private String pos;
+
     @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
     private Collection<MenuItem> menuItems;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPos() {
         return pos;

@@ -5,9 +5,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "menu_item")
-public class MenuItem extends EntityType {
-    @Column
-    private String name;
+public class MenuItem extends DictionaryEntity {
+
     @Column(name="display_name")
     private String displayName;
     @Column
@@ -15,20 +14,6 @@ public class MenuItem extends EntityType {
     @ManyToOne
     @JoinColumn(name = "menu_id")
     private Menu menu;
-    @Column
-    @Temporal(TemporalType.DATE)
-    private Date added;
-    @Column
-    @Temporal(TemporalType.DATE)
-    private Date modified;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDisplayName() {
         return displayName;
@@ -54,19 +39,4 @@ public class MenuItem extends EntityType {
         this.menu = menu;
     }
 
-    public Date getAdded() {
-        return added;
-    }
-
-    public void setAdded(Date added) {
-        this.added = added;
-    }
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
 }

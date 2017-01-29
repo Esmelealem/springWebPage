@@ -8,8 +8,8 @@ import java.util.Date;
 
 @MappedSuperclass
 public abstract class DictionaryEntity extends EntityType {
-    /*
-    typical column with a name of entity
+    /**
+     * typical column with a name of entity
      */
     @Column(name = "name")
     protected String name;
@@ -17,6 +17,9 @@ public abstract class DictionaryEntity extends EntityType {
     @Column(name = "deleted")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date deleted;
+
+    @Column(name = "is_default", columnDefinition = "BIT(1) DEFAULT 0")
+    protected Boolean isDefault;
 
     public String getName() {
         return name;
@@ -32,5 +35,13 @@ public abstract class DictionaryEntity extends EntityType {
 
     public void setDeleted(Date deleted) {
         this.deleted = deleted;
+    }
+
+    public Boolean getDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(Boolean aDefault) {
+        isDefault = aDefault;
     }
 }

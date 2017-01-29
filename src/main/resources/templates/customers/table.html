@@ -4,66 +4,73 @@
       layout:decorate="../templates/layout">
 
 
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-      <!--main content start-->
-      <section id="main-content" layout:fragment="main">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i>Sklep</h3>
-				<div class="row">
-	                  <div class="col-md-12 mt">
-	                  	<div class="content-panel">
-	                          <table class="table table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Klienci</h4>
-	                  	  	  <hr>
-	                              <thead>
-	                              <tr>
-	                                  <th>#</th>
-	                                  <th>First Name</th>
-	                                  <th>Last Name</th>
-	                                  <th>Username</th>
-	                              </tr>
-	                              </thead>
-	                              <tbody>
-	                              <tr>
-	                                  <td>1</td>
-	                                  <td>Mark</td>
-	                                  <td>Otto</td>
-	                                  <td>@mdo</td>
-	                              </tr>
-	                              <tr>
-	                                  <td>2</td>
-	                                  <td>Jacob</td>
-	                                  <td>Thornton</td>
-	                                  <td>@fat</td>
-	                              </tr>
-	                              <tr>
-	                                  <td>3</td>
-	                                  <td>Simon</td>
-	                                  <td>Mosa</td>
-	                                  <td>@twitter</td>
-	                              </tr>
-	                              </tbody>
-	                          </table>
-	                  	  </div><! --/content-panel -->
-	                  </div><!-- /col-md-12 -->
-				</div><!-- row -->
+<!-- **********************************************************************************************************************************************************
+MAIN CONTENT
+*********************************************************************************************************************************************************** -->
+<!--main content start-->
+<section id="main-content" layout:fragment="main">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>Sklep</h3>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt">
+                <div class="content-panel">
+                    <table class="table table-hover">
+                        <h4><i class="fa fa-angle-right"></i> Klienci</h4>
+                        <hr>
+                        <div class="btn-group" style="margin-left:10px">
+                            <a class="btn btn-primary" th:href="@{/store/addcustomer}">Dodaj</a>
+                        </div>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Simon</td>
+                            <td>Mosa</td>
+                            <td>@twitter</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <! --/content-panel -->
+            </div><!-- /col-md-12 -->
+        </div><!-- row -->
 
 
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+    </section>
+    <! --/wrapper -->
+</section><!-- /MAIN CONTENT -->
 
-    <!--script for this page-->
-    
-  <script>
-      //custom select box
+<!--script for this page-->
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
+<script>
+    //custom select box
 
-  </script>
+    $(function () {
+        $('select.styled').customSelect();
+    });
 
-  </body>
+</script>
+
+</body>
 </html>

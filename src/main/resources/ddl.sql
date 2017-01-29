@@ -164,3 +164,18 @@ ALTER TABLE item ADD FOREIGN KEY (unit_id) REFERENCES unit (id);
 CREATE INDEX FKdslletxhla0nehtlnmh63m2sj ON item (unit_id);
 ALTER TABLE menu_item ADD FOREIGN KEY (menu_id) REFERENCES menu (id);
 CREATE INDEX FKcdkmv42yhn6udah6ug8rsymfl ON menu_item (menu_id);
+
+#########################001
+ALTER TABLE seller.contact ADD PESEL VARCHAR(11) NULL;
+CREATE UNIQUE INDEX contact_PESEL_uindex ON seller.contact (PESEL);
+ALTER TABLE seller.contact ADD REGON VARCHAR(26) NULL;
+CREATE UNIQUE INDEX contact_REGON_uindex ON seller.contact (REGON);
+ALTER TABLE seller.contact ADD NIP VARCHAR(15) NULL;
+CREATE UNIQUE INDEX contact_NIP_uindex ON seller.contact (NIP);
+ALTER TABLE seller.contact ADD CONTACT_TYPE_ID INT NOT NULL;
+ALTER TABLE seller.contact
+    ADD CONSTRAINT contact_contact_type_id_fk
+FOREIGN KEY (CONTACT_TYPE_ID) REFERENCES contact_type (id);
+ALTER TABLE seller.contact
+    MODIFY COLUMN added DATETIME AFTER birth_date;
+ALTER TABLE seller.menu_item ADD SUBMENU_OF_ID INT NULL;

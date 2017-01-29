@@ -18,9 +18,12 @@ package pl.quider.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
+
+import java.util.Arrays;
 
 @SpringBootApplication
 public class WebApplication {
@@ -32,8 +35,9 @@ public class WebApplication {
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(WebApplication.class, args);
-	}
 
+
+	public static void main(String[] args) throws Exception {
+		ApplicationContext ctx = SpringApplication.run(WebApplication.class, args);
+	}
 }

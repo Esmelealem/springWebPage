@@ -80,7 +80,12 @@
                                     <input class="form-control" id="city" placeholder="Miasto" type="text">
                                 </div>
                                 <div class="col-sm-3">
-                                    <input class="form-control" id="country" placeholder="Państwo" type="text">
+                                    <select class="form-control" id="country" placeholder="Państwo">
+                                        <option th:each="country : ${countryList}"
+                                                th:text="${country.name}"
+                                                th:value="${country.id}"
+                                                th:selected="${country.id == 141}"/>
+                                    </select>
                                 </div>
                             </div>
                         </div>

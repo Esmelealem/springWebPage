@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.quider.web.model.Contact;
 import pl.quider.web.model.ContactType;
+import pl.quider.web.model.Country;
 import pl.quider.web.repository.ContactDao;
 import pl.quider.web.repository.ContactTypeDao;
+import pl.quider.web.repository.CountryDao;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 
 /**
@@ -46,6 +48,8 @@ public class StoreController {
     protected ContactTypeDao contactTypeDao;
     @Autowired
     protected ContactDao contactDao;
+    @Autowired
+    protected CountryDao countryDao;
 
     @GetMapping("/customers")
     public ModelAndView viewTable(ModelMap modelMap) {
@@ -74,6 +78,8 @@ public class StoreController {
     public ModelAndView addCustomerForm(ModelMap modelMap){
         Iterable<ContactType> all = this.contactTypeDao.findAll();
         modelMap.addAttribute("contactTypes", all);
+        Iterable<Country> countries = this.countryDao.findAll();
+        modelMap.addAttribute("countryList", countries);
         return new ModelAndView("customers/add", modelMap);
     }
 

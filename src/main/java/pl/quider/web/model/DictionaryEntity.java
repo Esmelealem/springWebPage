@@ -14,8 +14,6 @@ public abstract class DictionaryEntity extends EntityType {
     @Column(name = "name")
     protected String name;
 
-
-
     @Column(name = "deleted")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date deleted;

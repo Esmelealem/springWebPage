@@ -14,6 +14,10 @@ public class MenuItem extends DictionaryEntity {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
+    @OneToOne
+    @JoinColumn(name="parent_id")
+    private MenuItem parent;
+
     public String getDisplayName() {
         return displayName;
     }
@@ -38,4 +42,11 @@ public class MenuItem extends DictionaryEntity {
         this.menu = menu;
     }
 
+    public MenuItem getParent() {
+        return parent;
+    }
+
+    public void setParent(MenuItem parent) {
+        this.parent = parent;
+    }
 }

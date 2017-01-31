@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label class="col-sm-2  col-sm-2 control-label">Type</label>
                             <div class="col-sm-10">
-                                <select class="form-control" th:onclick="check(this)">
+                                <select class="form-control" th:onchange="check(this)">
                                     <option th:each="type : ${contactTypes}" th:text="${type.name}"
                                             th:value="${type.id}"></option>
                                 </select>
@@ -94,6 +94,13 @@
             </div><!-- col-lg-12-->
         </div><!-- /row -->
     </section>
+    <script>
+        //custom select box
+
+        function check(e){
+            alert(e)
+        }
+        </script>
     <! --/wrapper -->
 </section><!-- /MAIN CONTENT -->
 <!--script for this page-->

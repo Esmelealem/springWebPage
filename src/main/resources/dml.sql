@@ -209,8 +209,8 @@ INSERT INTO seller.address_type (added, modified, deleted, name, is_default) VAL
 
 INSERT INTO seller.menu (added, modified, deleted, name, pos, is_default) VALUES ('2017-01-28 13:24:09', '2017-01-28 13:24:09', null, 'MainMenu', null, null);
 
-INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, SUBMENU_OF_ID, is_default) VALUES ('2017-01-28 13:24:48', '2017-01-28 13:24:48', null, 'Dashboard', 'Dashboard', null, 1, null, null);
-INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, SUBMENU_OF_ID, is_default) VALUES ('2017-01-28 13:24:48', '2017-01-28 13:24:48', null, 'Sklep', 'Sklep', null, 1, null, null);
-INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, SUBMENU_OF_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Klienci', 'Klienci', null, 1, 2, null);
-INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, SUBMENU_OF_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Płatności', 'Płatności', null, 1, 2, null);
-INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, SUBMENU_OF_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Oferty', 'Oferty', null, 1, 2, null);
+INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:24:48', '2017-01-28 13:24:48', null, 'Dashboard', 'Dashboard', null, 1, null, null);
+INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:24:48', '2017-01-28 13:24:48', null, 'Sklep', 'Sklep', null, 1, null, null);
+INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Klienci', 'Klienci', null, 1, 2, null);
+INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Płatności', 'Płatności', null, 1, 2, null);
+INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Oferty', 'Oferty', null, 1, 2, null);

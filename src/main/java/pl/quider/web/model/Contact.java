@@ -30,10 +30,10 @@ public class Contact extends EntityType {
     private String nip;
     @Column(name = "REGON")
     private String regon;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CONTACT_TYPE_ID")
     private ContactType contactType;
-    @OneToMany(mappedBy = "contact")
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
     private List<ContactAddress> addresses;
     @Transient
     private Country formCountry;
@@ -47,6 +47,8 @@ public class Contact extends EntityType {
     private String formFlatNumber;
     @Transient
     private String formZipCode;
+    @Transient
+    private AddressType formAddressType;
 
     public Integer getId() {
         return id;
@@ -230,5 +232,21 @@ public class Contact extends EntityType {
      */
     public void setFormZipCode(String formZipCode) {
         this.formZipCode = formZipCode;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public AddressType getFormAddressType() {
+        return formAddressType;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formAddressType
+     */
+    public void setFormAddressType(AddressType formAddressType) {
+        this.formAddressType = formAddressType;
     }
 }

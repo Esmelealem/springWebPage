@@ -13,10 +13,10 @@ public abstract class EntityType {
     protected Integer id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "added", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "added", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP", nullable = false)
     protected Date added;
 
-    @Column(name = "modified", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "modified", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     protected Date modified;
 

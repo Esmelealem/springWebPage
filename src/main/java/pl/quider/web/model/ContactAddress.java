@@ -8,17 +8,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "contact_address")
 public class ContactAddress extends EntityType {
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_type_id")
     private AddressType addressType;
+
+    public ContactAddress(Address address, Contact contact) {
+        super();
+        this.contact = contact;
+        this.address = address;
+    }
 
     public Address getAddress() {
         return address;

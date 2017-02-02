@@ -61,27 +61,41 @@
                         <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">Adres</label>
                             <div class="row">
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="formAddressType" placeholder="Typ Adresu">
+                                        <!--/*@thymesVar id="countryList" type="java.util.List"*/-->
+                                        <!--/*@thymesVar id="country" type="pl.quider.web.model.AddressType"*/-->
+                                        <option th:each="addressType : ${addressTypeList}"
+                                                th:text="${addressType.name}"
+                                                th:value="${addressType.id}"
+                                                th:selected="${addressType.default}"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
+                            <div class="row">
                                 <div class="col-sm-3">
-                                    <input class="form-control" name="street" placeholder="Ulica" type="text">
+                                    <input class="form-control" name="formStreet" placeholder="Ulica" type="text">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input class="form-control" name="house" placeholder="Nr domu" type="text">
+                                    <input class="form-control" name="formHouseNumber" placeholder="Nr domu" type="text">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input class="form-control" name="flat" placeholder="Nr mieszkania" type="text">
+                                    <input class="form-control" name="formFlatNumber" placeholder="Nr mieszkania" type="text">
                                 </div>
                             </div>
                             <br />
                                 <label class="col-sm-2 col-sm-2 control-label">&nbsp;</label>
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <input class="form-control" name="zipCode" placeholder="Kod pocztowy" type="text">
+                                    <input class="form-control" name="formZipCode" placeholder="Kod pocztowy" type="text">
                                 </div>
                                 <div class="col-sm-3">
-                                    <input class="form-control" name="city" placeholder="Miasto" type="text">
+                                    <input class="form-control" name="formCity" placeholder="Miasto" type="text">
                                 </div>
                                 <div class="col-sm-3">
-                                    <select class="form-control" name="country" placeholder="Państwo">
+                                    <select class="form-control" name="formCountry" placeholder="Państwo">
                                         <!--/*@thymesVar id="countryList" type="java.util.List"*/-->
                                         <!--/*@thymesVar id="country" type="pl.quider.web.model.Country"*/-->
                                         <option th:each="country : ${countryList}"

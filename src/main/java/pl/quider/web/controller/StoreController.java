@@ -24,16 +24,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.quider.web.model.Address;
-import pl.quider.web.model.Contact;
-import pl.quider.web.model.ContactType;
-import pl.quider.web.model.Country;
-import pl.quider.web.repository.ContactDao;
-import pl.quider.web.repository.ContactTypeDao;
-import pl.quider.web.repository.CountryDao;
+import pl.quider.web.model.*;
+import pl.quider.web.repository.*;
 import pl.quider.web.service.ifc.WebServiceAllegro;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -54,6 +51,10 @@ public class StoreController {
     protected ContactDao contactDao;
     @Autowired
     protected CountryDao countryDao;
+    @Autowired
+    protected AddressTypeDao addressTypeDao;
+    @Autowired
+    protected ContactAddressDao contactAddressDao;
 
     @GetMapping("/customers")
     public ModelAndView viewTable(ModelMap modelMap) {
@@ -84,6 +85,8 @@ public class StoreController {
         modelMap.addAttribute("contactTypes", all);
         Iterable<Country> countries = this.countryDao.findAll();
         modelMap.addAttribute("countryList", countries);
+        Iterable<AddressType> addressTypes = this.addressTypeDao.findAll();
+        modelMap.addAttribute("addressTypeList",addressTypes);
         return new ModelAndView("customers/add", modelMap);
     }
 
@@ -94,8 +97,22 @@ public class StoreController {
      */
     @PostMapping("/addcustomer")
     public ModelAndView addCustomer(@ModelAttribute Contact contact, HttpServletRequest request, ModelMap modelMap){
+        Address address = new Address();
+        address.setCity(contact.getFormCity());
+        address.setHouseNumber(contact.getFormHouseNumber());
+        address.setFlatNumber(contact.getFormFlatNumber());
+        address.setZipCode(contact.getFormZipCode());
+        address.setStreet(contact.getFormStreet());
 
-
+        List<ContactAddress> addresses = contact.getAddresses();
+        if(addresses==null){
+            addresses = new ArrayList<>();
+            contact.setAddresses(addresses);
+        }
+        ContactAddress contactAddress = new ContactAddress(address, contact);
+        addresses.add(contactAddress);
+        contactAddress.setAddressType(contact.getFormAddressType());
+        this.contactDao.save(contact);
         return new ModelAndView("customers/add", modelMap);
     }
 }

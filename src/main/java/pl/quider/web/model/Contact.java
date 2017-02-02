@@ -33,9 +33,20 @@ public class Contact extends EntityType {
     @OneToOne
     @JoinColumn(name = "CONTACT_TYPE_ID")
     private ContactType contactType;
-
     @OneToMany(mappedBy = "contact")
     private List<ContactAddress> addresses;
+    @Transient
+    private Country formCountry;
+    @Transient
+    private String formCity;
+    @Transient
+    private String formStreet;
+    @Transient
+    private String formHouseNumber;
+    @Transient
+    private String formFlatNumber;
+    @Transient
+    private String formZipCode;
 
     public Integer getId() {
         return id;
@@ -123,5 +134,101 @@ public class Contact extends EntityType {
 
     public void setContactType(ContactType contactType) {
         this.contactType = contactType;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public Country getFormCountry() {
+        return formCountry;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formCountry
+     */
+    public void setFormCountry(Country formCountry) {
+        this.formCountry = formCountry;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public String getFormCity() {
+        return formCity;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formCity
+     */
+    public void setFormCity(String formCity) {
+        this.formCity = formCity;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public String getFormStreet() {
+        return formStreet;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formStreet
+     */
+    public void setFormStreet(String formStreet) {
+        this.formStreet = formStreet;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public String getFormHouseNumber() {
+        return formHouseNumber;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formHouseNumber
+     */
+    public void setFormHouseNumber(String formHouseNumber) {
+        this.formHouseNumber = formHouseNumber;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public String getFormFlatNumber() {
+        return formFlatNumber;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formFlatNumber
+     */
+    public void setFormFlatNumber(String formFlatNumber) {
+        this.formFlatNumber = formFlatNumber;
+    }
+
+    /**
+     * Not stored in DB
+     * @return
+     */
+    public String getFormZipCode() {
+        return formZipCode;
+    }
+
+    /**
+     * Not stored in DB
+     * @param formZipCode
+     */
+    public void setFormZipCode(String formZipCode) {
+        this.formZipCode = formZipCode;
     }
 }

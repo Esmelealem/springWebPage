@@ -214,3 +214,6 @@ INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href
 INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Klienci', 'Klienci', null, 1, 2, null);
 INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Płatności', 'Płatności', null, 1, 2, null);
 INSERT INTO seller.menu_item (added, modified, deleted, name, display_name, href, menu_id, PARENT_ID, is_default) VALUES ('2017-01-28 13:25:38', '2017-01-28 13:25:38', null, 'Oferty', 'Oferty', null, 1, 2, null);
+
+INSERT INTO seller.contact_type (is_default, name) VALUES (1, 'Osoba fizyczna');
+INSERT INTO seller.contact_type (is_default, name) VALUES (0, 'Osoba prawna');

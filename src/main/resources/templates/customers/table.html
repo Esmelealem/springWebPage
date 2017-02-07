@@ -25,30 +25,19 @@ MAIN CONTENT
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>Nazwisko / nazwa</th>
+                            <th>Imię</th>
+                            <th>Typ</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                        <tr th:each="contact : ${contactsList}">
+                            <td th:text="${contact.id}">1</td>
+                            <td th:text="${contact.firstName}">Mark</td>
+                            <td th:text="${contact.lastName}">Otto</td>
+                            <td th:text="${contact.contactType.name}">@mdo</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Simon</td>
-                            <td>Mosa</td>
-                            <td>@twitter</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>

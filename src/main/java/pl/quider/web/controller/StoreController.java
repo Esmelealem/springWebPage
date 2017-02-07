@@ -17,13 +17,14 @@
 package pl.quider.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pl.quider.web.dto.form.CreateContactDto;
 import pl.quider.web.model.*;
 import pl.quider.web.repository.*;
 import pl.quider.web.service.ifc.WebServiceAllegro;
@@ -57,8 +58,9 @@ public class StoreController {
     protected ContactAddressDao contactAddressDao;
 
     @GetMapping("/customers")
-    public ModelAndView viewTable(ModelMap modelMap) {
-
+    public ModelAndView viewTable(ModelMap modelMap, Pageable pageable) {
+        Page<Contact> all = contactDao.findAll(pageable);
+        modelMap.addAttribute("contactsList", all);
         return new ModelAndView("customers/table", modelMap);
     }
 
@@ -96,7 +98,19 @@ public class StoreController {
      * @return
      */
     @PostMapping("/addcustomer")
-    public ModelAndView addCustomer(@ModelAttribute Contact contact, HttpServletRequest request, ModelMap modelMap){
+    public ModelAndView addCustomer(@ModelAttribute CreateContactDto contact, HttpServletRequest request, ModelMap modelMap){
+        Contact newContact = new Contact();
+        newContact.setLastName(contact.getLastName());
+        newContact.setFirstName(contact.getFirstName());
+        newContact.setNip(contact.getNip());
+        newContact.setBirthDate(contact.getBirthDate());
+        newContact.setContactType(contact.getContactType());
+        newContact.setFoundDate(contact.getFoundDate());
+        newContact.setRegon(contact.getRegon());
+        newContact.setPesel(contact.getPesel());
+        newContact.setMiddleName(contact.getMiddleName());
+        newContact.setNip(contact.getNip());
+
         Address address = new Address();
         address.setCity(contact.getFormCity());
         address.setHouseNumber(contact.getFormHouseNumber());
@@ -104,15 +118,48 @@ public class StoreController {
         address.setZipCode(contact.getFormZipCode());
         address.setStreet(contact.getFormStreet());
 
-        List<ContactAddress> addresses = contact.getAddresses();
+        List<ContactAddress> addresses = newContact.getAddresses();
         if(addresses==null){
             addresses = new ArrayList<>();
             contact.setAddresses(addresses);
         }
-        ContactAddress contactAddress = new ContactAddress(address, contact);
+        ContactAddress contactAddress = new ContactAddress(address, newContact);
         addresses.add(contactAddress);
         contactAddress.setAddressType(contact.getFormAddressType());
-        this.contactDao.save(contact);
+        this.contactDao.save(newContact);
+        return new ModelAndView("redirect:/customers/");
+    }
+
+    @GetMapping(value ="/updatecustomer", params = {"id"})
+    public ModelAndView updateCustomer(ModelMap modelMap, @RequestParam(value = "id") Integer id){
+        CreateContactDto contact = new CreateContactDto();
+
+        Contact newContact = contactDao.findOne(id);
+        if (newContact == null) {
+            return new ModelAndView("redirect:/addcustomer");
+        }
+        newContact.setLastName(contact.getLastName());
+        newContact.setFirstName(contact.getFirstName());
+        newContact.setNip(contact.getNip());
+        newContact.setBirthDate(contact.getBirthDate());
+        newContact.setContactType(contact.getContactType());
+        newContact.setFoundDate(contact.getFoundDate());
+        newContact.setRegon(contact.getRegon());
+        newContact.setPesel(contact.getPesel());
+        newContact.setMiddleName(contact.getMiddleName());
+        newContact.setNip(contact.getNip());
+
+        Address address = new Address();
+        address.setCity(contact.getFormCity());
+        address.setHouseNumber(contact.getFormHouseNumber());
+        address.setFlatNumber(contact.getFormFlatNumber());
+        address.setZipCode(contact.getFormZipCode());
+        address.setStreet(contact.getFormStreet());
+
+
+        modelMap.addAttribute("contact",contact);
         return new ModelAndView("customers/add", modelMap);
     }
+
+
 }
